@@ -6,11 +6,13 @@ describe('Testes de Login', () => {
 
     describe('Sucesso', () => {
         it('Credenciais válidas', () => {
-            cy.get('#login-email').type('testes.iarastevanialves@gmail.com')
-            cy.get('#login-password').type('12345678')
-            cy.get('#login-form > .btn-primary').click()
+            cy.fixture('credenciais').then((credenciais) => {
+                cy.get('#login-email').type(credenciais.valida.email)
+                cy.get('#login-password').type(credenciais.valida.senha)
+            });
 
-            cy.contains('Hi, Iara').should('be.visible')
+            cy.get('#login-form > .btn-primary').click()
+            cy.contains('Hi, QA').should('be.visible')
             cy.get('#logout-btn').should('be.visible')
         });
     });
@@ -18,17 +20,22 @@ describe('Testes de Login', () => {
     describe('Falha', () => {
 
         it('Senha inválida', () => {
-            cy.get('#login-email').type('testes.iarastevanialves@gmail.com')
-            cy.get('#login-password').type('1234567')
-            cy.get('#login-form > .btn-primary').click()
+            cy.fixture('credenciais').then((credenciais) => {
+                cy.get('#login-email').type(credenciais.valida.email)
+                cy.get('#login-password').type(credenciais.invalida.senha)
+            });
 
+            cy.get('#login-form > .btn-primary').click()
             cy.get('#login-error').contains('Invalid email or password').should('be.visible')
         });
 
         it('Senha vazia', () => {
-            cy.get('#login-email').type('testes.iarastevanialves@gmail.com')
-            cy.get('#login-form > .btn-primary').click()
+            cy.fixture('credenciais').then((credenciais) => {
+                cy.get('#login-email').type(credenciais.valida.email)
 
+            });
+
+            cy.get('#login-form > .btn-primary').click()
             cy.get('#login-password')
                 .should('match', ':invalid')
                 .and(($input) => {
@@ -37,10 +44,12 @@ describe('Testes de Login', () => {
         });
 
         it('E-mail invalido', () => {
-            cy.get('#login-email').type('testes.com')
-            cy.get('#login-password').type('12345678')
-            cy.get('#login-form > .btn-primary').click()
+            cy.fixture('credenciais').then((credenciais) => {
+                cy.get('#login-email').type(credenciais.invalida.email)
+                cy.get('#login-password').type(credenciais.valida.senha)
+            });
 
+            cy.get('#login-form > .btn-primary').click()
             cy.get('#login-email')
                 .should('match', ':invalid')
                 .and(($input) => {
@@ -49,8 +58,11 @@ describe('Testes de Login', () => {
         });
 
         it('E-mail vazio', () => {
-            cy.get('#login-form > .btn-primary').click()
+            cy.fixture('credenciais').then((credenciais) => {
+                cy.get('#login-password').type(credenciais.valida.senha)
+            });
 
+            cy.get('#login-form > .btn-primary').click()
             cy.get('#login-email')
                 .should('match', ':invalid')
                 .and(($input) => {
