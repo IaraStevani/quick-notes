@@ -1,7 +1,7 @@
 describe('Testes de Login', () => {
 
     beforeEach(() => {
-        cy.visit('https://quick-notes.club/')
+        cy.visit('/')
     });
 
     describe('Sucesso', () => {
