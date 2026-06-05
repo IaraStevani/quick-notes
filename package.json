@@ -1,0 +1,23 @@
+{
+  "name": "quick-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IaraStevani/quick-notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IaraStevani/quick-notes/issues"
+  },
+  "homepage": "https://github.com/IaraStevani/quick-notes#readme",
+  "devDependencies": {
+    "cypress": "^15.16.0"
+  }
+}
