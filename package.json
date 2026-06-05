@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run"
+    "test": "cypress run",
+    "test-qa": "cypress run",
+    "test-prod": "cypress run",
+    "cy:headed": "cypress open --headed",
+    "cy:open": "cypress open"
   },
   "repository": {
     "type": "git",
